@@ -55,7 +55,7 @@ The raw data file (~9 MB) is **not stored in this repository**. `src/download_da
 Requires Python 3.10 or newer.
 
 ```bash
-git clone https://github.com/<your-username>/gulf-electricity-transition.git
+git clone https://github.com/emanmusheer2008-glitch/gulf-electricity-transition.git
 cd gulf-electricity-transition
 
 python -m venv .venv
