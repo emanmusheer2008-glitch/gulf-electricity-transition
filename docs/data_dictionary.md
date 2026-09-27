@@ -22,7 +22,7 @@ Descriptions come from the official OWID codebook (`owid-energy-codebook.csv`). 
 
 | Column | Meaning |
 |---|---|
-| `repeated_from_previous_year` | `True` if generation, renewables share and low-carbon share are all *exactly* equal to the previous year for that country. This suggests the value was carried forward, so the row is excluded from the analysis. |
+| `repeated_from_previous_year` | `True` if generation, renewables share and low-carbon share are all *exactly* equal to the previous year for that country. This is a potential data-quality anomaly (the values may have been carried forward), so the row is flagged for review and excluded from the analysis. It is not treated as a confirmed error. |
 
 ## Units in plain words
 

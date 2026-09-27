@@ -12,7 +12,7 @@ import config
 
 
 def load_clean() -> pd.DataFrame:
-    """Read the cleaned data and remove rows flagged as copied."""
+    """Read the cleaned data and leave out rows flagged as potential anomalies."""
     if not config.CLEAN_DATA_FILE.exists():
         raise FileNotFoundError(
             f"{config.CLEAN_DATA_FILE} not found. Run  python src/clean_data.py  first."

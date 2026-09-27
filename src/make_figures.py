@@ -140,7 +140,7 @@ def fig_latest_ranking(latest: pd.DataFrame) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Figure 3: electricity use per person vs the world average
+# Figure 3: electricity generated per person vs the world average
 # ---------------------------------------------------------------------------
 def fig_per_capita(latest: pd.DataFrame) -> None:
     d = latest[latest["country"].isin(config.GCC_COUNTRIES)]
@@ -158,8 +158,8 @@ def fig_per_capita(latest: pd.DataFrame) -> None:
     ax.set_xlabel("Electricity generated per person (kWh per year)")
     ax.grid(axis="y", visible=False)
     ax.set_xlim(0, d["per_capita_electricity"].max() * 1.2)
-    finish(fig, "Gulf residents use 2–6 times more electricity than the world average",
-              "Electricity generation per person, latest year (hot climate: much of it goes to air-conditioning)")
+    finish(fig, "GCC countries generate 2.5–6 times more electricity per person than the world",
+              "Electricity generation per person, latest year with reliable data")
     save(fig, "03_electricity_per_person.png")
 
 

@@ -83,7 +83,7 @@ run_all.py
    ├─ 1. download_data.download()      internet ──► data/raw/owid-energy-data.csv   (23,000+ rows × 130 columns)
    │
    ├─ 2. clean_data.clean()            keep 7 places, years ≥ 2010, 13 columns
-   │                                   flag rows copied from last year (Kuwait 2025)
+   │                                   flag rows identical to last year (Kuwait 2025)
    │                                   ──► data/processed/gcc_electricity.csv      (109 rows)
    │
    ├─ 3. analysis.*                    drop flagged rows
@@ -119,7 +119,7 @@ So Saudi Arabia would need a pace roughly **12 times faster** than 2021–2024. 
 - `.shift(1)` moves values down one row, so each row can "see" last year's value.
 - If generation, renewables share and low-carbon share are *all exactly equal*, the row is flagged.
 
-Kuwait 2025 was flagged. Its values are identical to 2024, which almost never happens with real measurements.
+Kuwait 2025 was flagged. Its values are identical to 2024, which is unusual for real measurements. We call it a **potential data-quality anomaly, flagged for review**, not a confirmed error. We cannot know *why* the numbers repeat (a placeholder until new data arrives? a genuine coincidence?) unless the source says so. Leaving it out is the cautious choice. Always describe what you **observed**, not what you **guess**.
 
 ## 8. How to run it
 
@@ -167,7 +167,7 @@ Practise answering these **out loud, without looking**:
 4. What is the difference between "renewables" and "low-carbon"? Why did you use low-carbon for the UAE?
 5. What is the difference between a *percentage* and a *percentage point*?
 6. Why is the raw data not uploaded to GitHub?
-7. What problem did you find in the data, and how did your code detect it?
+7. What anomaly did your code flag in the data, how did it detect it, and why do you call it an *anomaly* rather than an *error*?
 8. Explain the required-pace calculation for Saudi Arabia with the actual numbers.
 9. Why is the UAE's "if recent pace continued" line misleading?
 10. Why didn't you use machine learning? When *would* machine learning make sense for this topic?

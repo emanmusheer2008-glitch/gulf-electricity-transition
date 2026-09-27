@@ -27,7 +27,7 @@ This is a small, reproducible data-analysis project using open data. It download
 | Bahrain | 0.3% | 23,615 | no change |
 
 - **Five of six countries still generate more than 95% of their electricity from gas and oil.** The UAE is the exception, mainly because of the Barakah nuclear power plant (first electricity in 2020, fourth reactor in 2024).
-- **Electricity use per person is 2.5–6 times the world average** (world: ~3,860 kWh). Total generation also grew by 59–167% between 2010 and the latest year, so new clean electricity first has to keep up with that growth.
+- **Electricity generated per person is 2.5–6 times the world average** (world: ~3,860 kWh). Total generation also grew by 59–167% between 2010 and the latest year, so new clean electricity first has to keep up with that growth.
 - **Saudi Arabia's official target is roughly 50% renewable electricity by 2030.** From 2.2% in 2024, that needs about **8 percentage points per year**. The average over 2021–2024 was about **0.6 points per year**. New power plants could change this pace quickly. This analysis only measures the past pace and does not predict the future.
 - **The UAE targets 35% clean electricity generation by 2031** and was at 31.7% in 2024. It needs about 0.5 points per year. Most of its recent growth came from nuclear reactors that are now all running, so future growth has to come from solar.
 
@@ -90,7 +90,7 @@ gulf-electricity-transition/
 ## Method
 
 1. **Filter:** keep the 6 GCC countries plus the World, years 2010 onwards and 13 of the ~130 columns.
-2. **Quality check:** flag rows where the main values are *exactly* the same as the previous year. One row, Kuwait 2025, was flagged as carried forward and excluded.
+2. **Quality check:** flag rows where the main values are *exactly* the same as the previous year. One row, Kuwait 2025, matched 2024 exactly. This is a **potential data-quality anomaly, detected and flagged for review**. The source does not say why the values repeat, so the row is left out of the analysis rather than treated as a confirmed error.
 3. **Describe:** compare the first year (2010) with the latest year for each country.
 4. **Target check:** `required pace = (target − current) ÷ years left` and `recent pace = change over the last 3 years ÷ 3`.
 
@@ -107,9 +107,19 @@ gulf-electricity-transition/
 ## Possible next steps
 
 - Add the other GCC targets after checking each one against an official source.
-- Add monthly data (Ember publishes monthly electricity data) to look at summer peaks from air-conditioning.
+- Add monthly data (Ember publishes monthly electricity data) to look at seasonal patterns such as summer peaks.
 - Compare with installed solar capacity data (IRENA) to separate "capacity built" from "electricity produced".
 - Build a small interactive dashboard (e.g. Streamlit) on top of the same cleaned data.
+
+## Sources
+
+- Our World in Data, *Energy dataset* (CC BY 4.0): https://github.com/owid/energy-data
+- Ember, *Yearly Electricity Data* (CC BY 4.0): https://ember-energy.org/data/yearly-electricity-data/
+- Saudi Ministry of Energy, *Renewable Energy* programme page: "renewables which are going to make up around 50% of the energy mix used to produce electricity by 2030": https://www.moenergy.gov.sa/en/eco-system/programs/renewable-energy
+- UAE Government portal, *UAE Energy Strategy 2050*: "Increase the share of clean energy generation to 35% by 2031": https://u.ae/en/about-the-uae/strategies-initiatives-and-awards/strategies-plans-and-visions/environment-and-energy/uae-energy-strategy-2050
+- NucNet, Barakah fourth reactor begins commercial operation (September 2024): https://www.nucnet.org/news/uae-hails-historic-milestone-as-fourth-and-final-reactor-begins-operation-9-4-2024
+
+Targets and data were re-checked on 27 September 2026.
 
 ## Credits
 

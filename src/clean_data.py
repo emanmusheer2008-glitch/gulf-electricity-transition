@@ -8,8 +8,10 @@ What "cleaning" means here:
   1. Keep only the six GCC countries plus the World average.
   2. Keep only years from START_YEAR onwards.
   3. Keep only the columns listed in config.COLUMNS.
-  4. Flag suspicious rows where the latest year looks like a copy of the
-     year before (this happens when a source has not published new data yet).
+  4. Flag rows whose values are exactly the same as the year before.
+     This is a POTENTIAL data-quality anomaly (for example, a value carried
+     forward until new data is published). We flag it for review and leave
+     it out; we do not claim it is a confirmed error.
   5. Save a small, tidy CSV to data/processed/.
 """
 
@@ -51,7 +53,7 @@ def flag_repeated_years(df: pd.DataFrame) -> pd.DataFrame:
 
     It is True when every value in CHECK_COLUMNS is exactly the same as the
     previous year for the same country. Real data almost never repeats
-    exactly, so this usually means the number was carried forward.
+    exactly, so this is flagged as a potential anomaly for review.
     """
     df = df.copy()
     # groupby("country") so we only compare a country with itself.
@@ -70,8 +72,8 @@ def clean() -> pd.DataFrame:
 
     flagged = df[df["repeated_from_previous_year"]]
     if not flagged.empty:
-        print("Warning: these rows look copied from the previous year and will be")
-        print("excluded from the analysis:")
+        print("Potential data-quality anomaly: these rows repeat the previous year exactly.")
+        print("Flagged for review and excluded from the analysis:")
         print(flagged[["country", "year"]].to_string(index=False))
 
     config.PROCESSED_DATA_DIR.mkdir(parents=True, exist_ok=True)
