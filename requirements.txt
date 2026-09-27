@@ -1,0 +1,8 @@
+# Core (needed to run run_all.py)
+pandas>=2.0
+matplotlib>=3.7
+tabulate>=0.9        # lets pandas write Markdown tables (findings.md)
+
+# Development (tests and notebook)
+pytest>=7.0
+jupyter>=1.0
