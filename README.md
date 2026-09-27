@@ -4,6 +4,14 @@ How quickly are the six Gulf (GCC) countries moving from gas and oil to low-carb
 
 This is a small, reproducible data-analysis project using open data. It downloads the data, cleans it, checks it for problems, compares countries and draws five charts. You can run all of it with one command.
 
+| | |
+|---|---|
+| **Type** | Data analysis (Python, pandas, matplotlib) |
+| **Region** | Saudi Arabia · UAE · Qatar · Kuwait · Oman · Bahrain |
+| **Data** | Our World in Data + Ember, CC BY 4.0, 2010 to 2024/2025 |
+| **Output** | 5 charts, a findings table and a check of 2 official targets |
+| **Quality** | 5 automated tests · one-command run · data-quality check |
+
 ![Low-carbon share of electricity in each GCC country](reports/figures/01_low_carbon_share_over_time.png)
 
 ## Questions
@@ -87,6 +95,16 @@ gulf-electricity-transition/
 └── docs/data_dictionary.md  # what each column means
 ```
 
+## How it works
+
+```mermaid
+flowchart LR
+    A[OWID energy CSV<br/>~23,000 rows × 130 columns] -->|download_data.py| B[data/raw]
+    B -->|clean_data.py<br/>keep GCC + World, 2010+, 13 columns<br/>flag repeated years| C[data/processed<br/>109 rows]
+    C -->|analysis.py| D[findings.md<br/>summary + target check]
+    C -->|make_figures.py| E[5 charts]
+```
+
 ## Method
 
 1. **Filter:** keep the 6 GCC countries plus the World, years 2010 onwards and 13 of the ~130 columns.
@@ -103,6 +121,14 @@ gulf-electricity-transition/
 - **Only two targets are checked.** Qatar, Oman, Kuwait and Bahrain have targets too, but they were not verified against an official source for this version, so they are not included.
 - **Generation, not capacity.** Some targets are written in installed capacity (GW). This project uses generation (TWh), which is what the data provides.
 - **Data revisions.** OWID and Ember update their data. Rerunning later may change the numbers slightly.
+
+## What I learned
+
+- **Check the data before trusting it.** A row that repeats the year before exactly can be a sign that a value was carried forward. Flag it, don't guess.
+- **Percentage points ≠ percent.** Going from 2% to 5% is +3 percentage points, but +150%.
+- **Simple and honest beats complex.** With ~15 yearly points per country, arithmetic explains more than a machine-learning model would.
+- **Straight-line projections can mislead.** The UAE's growth came from nuclear plants that will not be built again at the same pace.
+- **Definitions matter.** "Clean", "renewable" and "low-carbon" are not the same thing.
 
 ## Possible next steps
 
